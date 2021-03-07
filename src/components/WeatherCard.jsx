@@ -21,21 +21,35 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const WeatherCard = ({ weather }) => {
+const weatherImages = {
+  Rain: rainy,
+  Clouds: cloudy,
+  Clear: sunny
+};
+
+const WeatherCard = ({ weather, unit }) => {
   const classes = useStyles();
+  const { main, description, feels_like } = weather.weather[0];
+  const weatherImage = weatherImages[main];
+
+  const unitChar = unit === "imperial" ? "F" : "C";
+  const degrees = `${"\u00b0"}${unitChar}`;
+  const date = new Date(weather.dt * 1000);
 
   return (
     <Card className={classes.root}>
       <CardHeader
         classes={classes.avatar}
-        avatar={`Temp: ${weather.main?.temp}`}
-        title={weather.name}
+        avatar={`Temp: ${weather.main.temp} ${degrees}`}
+        title={date.toUTCString()}
       />
-      <CardMedia className={classes.media} image={cloudy} />
+      <CardMedia className={classes.media} image={weatherImage} />
       <CardContent>
-        <Typography>{weather.weather[0].main}</Typography>
-        <Typography>{weather.weather[0].description}</Typography>
-        <Typography>Feels like: {weather.main.feels_like}</Typography>
+        <Typography>Forecast: {main}</Typography>
+        <Typography>Description: {description}</Typography>
+        <Typography>
+          Feels like: {weather.main.feels_like} {degrees}
+        </Typography>
       </CardContent>
     </Card>
   );

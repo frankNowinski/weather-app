@@ -2,7 +2,7 @@ import React from "react";
 import WeatherCard from "./WeatherCard";
 import Grid from "@material-ui/core/Grid";
 
-const FiveDayWeather = ({ weather }) => {
+const FiveDayWeather = ({ weather, unit }) => {
   const hasWeather = Object.keys(weather).length > 0;
 
   return (
@@ -10,7 +10,7 @@ const FiveDayWeather = ({ weather }) => {
       {hasWeather &&
         weather.list.slice(0, 5).map((list, i) => (
           <div key={i}>
-            <WeatherCard weather={list} />
+            <WeatherCard weather={list} unit={unit} />
           </div>
         ))}
     </Grid>
