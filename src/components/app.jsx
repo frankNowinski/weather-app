@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import "../App.css";
+import Box from "@material-ui/core/Box";
 import CurrentWeather from "./CurrentWeather";
 import FiveDayWeather from "./FiveDayWeather";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormLabel from "@material-ui/core/FormLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import SearchByCity from "./SearchByCity";
 
 const App = () => {
-  const [view, setView] = useState("current-weather");
+  const [view, setView] = useState("five-day-weather");
+  const [currentWeather, setCurrentWeather] = useState({});
+  const [fiveDayWeather, setFiveDayWeather] = useState({});
+
+  const currentWeatherView = view === "current-weather";
 
   return (
     <Box p={3}>
@@ -36,7 +40,16 @@ const App = () => {
         </RadioGroup>
       </FormControl>
 
-      {view === "current-weather" ? <CurrentWeather /> : <FiveDayWeather />}
+      <SearchByCity
+        setCurrentWeather={setCurrentWeather}
+        setFiveDayWeather={setFiveDayWeather}
+      />
+
+      {currentWeatherView ? (
+        <CurrentWeather weather={currentWeather} />
+      ) : (
+        <FiveDayWeather weather={fiveDayWeather} />
+      )}
     </Box>
   );
 };

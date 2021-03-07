@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import React from "react";
+import WeatherCard from "./WeatherCard";
+import Grid from "@material-ui/core/Grid";
 
-const FiveDayWeather = () => {
-  const [view, setView] = useState("current-weather");
-  const [value, setValue] = React.useState("female");
+const FiveDayWeather = ({ weather }) => {
+  const hasWeather = Object.keys(weather).length > 0;
 
-  const handleChange = event => {
-    setValue(event.target.value);
-  };
-
-  return <Box p={3}>Hello</Box>;
+  return (
+    <Grid container alignItems="center" justify="center">
+      {hasWeather &&
+        weather.list.slice(0, 5).map(list => <WeatherCard weather={list} />)}
+    </Grid>
+  );
 };
 
 export default FiveDayWeather;
