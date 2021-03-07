@@ -6,9 +6,13 @@ const FiveDayWeather = ({ weather }) => {
   const hasWeather = Object.keys(weather).length > 0;
 
   return (
-    <Grid container alignItems="center" justify="center">
+    <Grid container justify="center">
       {hasWeather &&
-        weather.list.slice(0, 5).map(list => <WeatherCard weather={list} />)}
+        weather.list.slice(0, 5).map((list, i) => (
+          <div key={i}>
+            <WeatherCard weather={list} />
+          </div>
+        ))}
     </Grid>
   );
 };

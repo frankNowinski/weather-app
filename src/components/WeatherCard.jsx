@@ -7,7 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
 var cloudy = require("../images/cloudy.png");
-var sun = require("../images/sun.svg");
+var rainy = require("../images/rainy.png");
+var sunny = require("../images/sunny.png");
 
 const useStyles = makeStyles(theme => ({
   root: {
