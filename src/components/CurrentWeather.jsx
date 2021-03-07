@@ -1,33 +1,31 @@
 import React, { useState } from "react";
-import WeatherDisplay from "./WeatherDisplay";
+import WeatherCard from "./WeatherCard";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import { fetchWeather } from "../utils";
-
-var cloudy = require("../images/cloudy.png");
-var sun = require("../images/sun.svg");
 
 const CurrentWeather = () => {
   const [city, setCity] = useState("miami");
   const [weather, setWeather] = useState({});
 
   const handleSubmit = e => {
-    e.preventDefault();
-    fetchWeather("miami").then(res => setWeather(res));
+    fetchWeather("new york").then(res => setWeather(res));
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="city"
-          type="text"
-          placeholder="Search for Weather By City"
-          value={city}
-          onChange={e => setCity(e.target.value)}
-        />
-        <input type="submit" value="Submit" />
-      </form>
+      <TextField
+        name="city"
+        placeholder="Search for Weather By City"
+        value={city}
+        onChange={e => setCity(e.target.value)}
+      />
 
-      <WeatherDisplay weather={weather} />
+      <Button color="primary" variant="contained" onClick={handleSubmit}>
+        Submit
+      </Button>
+
+      {Object.keys(weather).length > 0 && <WeatherCard weather={weather} />}
     </div>
   );
 };
