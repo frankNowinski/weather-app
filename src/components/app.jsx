@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ReactComponent as Logo } from "../images/sun.png";
 import "../App.css";
 import CurrentWeather from "./CurrentWeather";
 
